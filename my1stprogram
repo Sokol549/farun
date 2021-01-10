@@ -130,7 +130,7 @@ def input_time():
 
 def ftp_img():
     ftp = FTP('ftp.kzvs.nichost.ru')
-    ftp.login('kzvs_ftp5', '12sHykm8')
+    ftp.login()
     ftp.encoding = 'cp1251'
     data = ftp.retrlines('LIST')
     print(data)
