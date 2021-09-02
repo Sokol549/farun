@@ -5,19 +5,20 @@ from os import path
 from tkinter import *
 from tkinter.ttk import Combobox
 
-myfile = open('myfile.html', 'w')
 
 
 def clicked():  
     
-    main_menu(str(inputName.get()),str(inputUserName.get()),str(inputEngUsrName.get()),str(inputDname.get()), str(inputEmail.get()), str(inputPhone.get()))  
+    main_menu(str(inputName.get()),str(inputUserName.get()),str(inputEngUsrName.get()),str(inputDname.get()),
+     str(inputEmail.get()), str(inputPhone.get()), str(inputPhone1.get())) 
   
-def main_menu(inputName, inputUserName="0", inputEngUsrName="0", inputDname='0', inputEmail='0', inputPhone='0'):
+def main_menu(inputName, inputPhone1, inputUserName="0", inputEngUsrName="0", inputDname='0', inputEmail='0', inputPhone='0'):
     #inputName = input("Введи название файла фото\n")
     #inputUserName = input('ФИО сотрудника\n')
     #inputEngUsrName = input('Фамилию и имя на английском\n')
     #inputDname = input('Должность\n')
     #inputEmail = input('Почту\n')
+    myfile = open('myfile.html', 'w')
     myfile.write('''<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
         <html>
             <head>
@@ -60,10 +61,16 @@ def main_menu(inputName, inputUserName="0", inputEngUsrName="0", inputDname='0',
                         <br/>
                         <!--Размер шрифта Значок почты--><p style="font-size: 14px; font-weight: 300; color:#000000;"><img src="http://img.kzvs.ru/email.png" width="13" height="13"/>''')
     myfile.write(inputEmail)
-    myfile.write(
-            '<!--Значки телефонов--> <p style="font-size: 14px; font-weight: 300; color:#000000;"><img src="http://img.kzvs.ru/phone.png" width="13" height="13"/>')
-    myfile.write(inputPhone)
-    myfile.write('<br/>')
+    if len(inputPhone) > 0:
+        myfile.write(
+                '<!--Значки телефонов--> <p style="font-size: 14px; font-weight: 300; color:#000000;"><img src="http://img.kzvs.ru/phone.png" width="13" height="13"/>')
+        myfile.write(inputPhone)
+        myfile.write('<br/>')
+    if len(inputPhone) > 0:
+        myfile.write(
+                '<!--Значки телефонов--> <p style="font-size: 14px; font-weight: 300; color:#000000;"><img src="http://img.kzvs.ru/phone.png" width="13" height="13"/>')
+        myfile.write(inputPhone1)
+        myfile.write('<br/>')
     myfile.write('''</p>
 
                         <!--<p style="font-size: 14px; font-weight: 300; color:#000000;"><img src="https://docs.google.com/uc?id=1yuKblqWqCLATryjXq1hMYZGvYJyL5Mfb" width="13" height="13"/> +7(938) 431 35 84<br/>-->
@@ -113,37 +120,38 @@ def main_menu(inputName, inputUserName="0", inputEngUsrName="0", inputDname='0',
         ''')
     myfile.close()
     os.replace('myfile.html', inputUserName + '.html')
-
+    myfile = open('myfile.html', 'w')
 
   
 
 window = Tk()  
 window.title("Подпись")  
-#window.geometry('400x250')  
-lbl = Label(window, text="Имя фото", font=("Arial Bold", 15))  
-lbl.grid()
+lbl = Label(window, text="Имя фото без расширения", font=("Arial Bold", 15))  
+lbl.grid(row=1)
 inputName = Entry(window, width=30)
-inputName.grid()
+inputName.grid(row=2)
 lbl = Label(window, text="ФИО", font=("Arial Bold", 15)) 
-lbl.grid()
+lbl.grid(row=3)
 inputUserName = Entry(window, width=30)
-inputUserName.grid()
+inputUserName.grid(row=4)
 lbl = Label(window, text="Eng Name", font=("Arial Bold", 15)) 
-lbl.grid()
+lbl.grid(row=5)
 inputEngUsrName = Entry(window, width=30)
-inputEngUsrName.grid()
+inputEngUsrName.grid(row=6)
 lbl = Label(window, text="Должность", font=("Arial Bold", 15)) 
-lbl.grid()
+lbl.grid(row=7)
 inputDname = Entry(window, width=30)
-inputDname.grid()
+inputDname.grid(row=8)
 lbl = Label(window, text="Почта", font=("Arial Bold", 15)) 
-lbl.grid()
+lbl.grid(row=9)
 inputEmail = Entry(window, width=30)
-inputEmail.grid()
+inputEmail.grid(row=10)
 lbl = Label(window, text="Телефон", font=("Arial Bold", 15)) 
-lbl.grid()
+lbl.grid(row=11)
 inputPhone = Entry(window, width=30)
-inputPhone.grid() 
+inputPhone.grid(row=12)
+inputPhone1 = Entry(window, width=30)
+inputPhone1.grid(row=14) 
 btn = Button(window, text="Штампуй!", command=clicked)  
-btn.grid()  
+btn.grid(row=0)  
 window.mainloop()
